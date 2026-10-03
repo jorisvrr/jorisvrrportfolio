@@ -67,43 +67,71 @@ export const WORK_INTRO = {
 } as const;
 
 /**
- * FEATURED WORK — exactly two.
+ * FEATURED WORK — exactly two, in this order.
  *
- * `caseStudy` points at a real page only when one exists; BEBO has none, and
- * the interface says what is true instead (the client's site is a holding
- * page today: "Onze website is in ontwikkeling", checked 2026-09-29).
+ * MODUS leads because it is the larger piece of work; nothing else marks it
+ * out, because the first position is the whole of the hierarchy here.
+ *
+ * `caseStudy` points at a real page only when one exists. BEBO has none, and
+ * its link goes to the domain rather than claiming otherwise: the site in the
+ * picture is built, but bebobetonboren.nl still serves the holding page
+ * ("Onze website is in ontwikkeling", checked 2026-10-04).
+ *
+ * `media.live` is a URL that may be embedded over the still. It is an
+ * enhancement and never a requirement: the still is what the composition is
+ * built on, and components/site/WorkLive decides whether running the real
+ * thing on top of it is worth the cost.
  */
 export const FEATURED = [
   {
     /** `kind` is not shown: it is what the link is called for a screen
      *  reader, which needs more than a name and an image. */
+    kind: "Product / Development",
+    title: ["MODUS"],
+    slug: "modus",
+    summary:
+      "A business software and automation platform built around finding friction: mapping how a company actually works, fixing what is slowing it down, and connecting the tools behind it.",
+    media: {
+      src: "/work/modus-home",
+      w: 1680,
+      h: 958,
+      alt: "withmodus.co: the homepage, with the network of a business resolving behind the opening line",
+      caption: "withmodus.co, the live homepage",
+      /**
+       * The still above is the floor, and this runs on top of it where it is
+       * worth doing. The site sets no X-Frame-Options and no CSP
+       * frame-ancestors, so it embeds; www is named directly so the frame
+       * does not start on a redirect.
+       *
+       * `?embed=1` is a request, not a requirement. Framed, MODUS has no
+       * stored consent, so its privacy dialog opens over the homepage every
+       * time somebody scrolls past this. MODUS ignores the parameter today
+       * and nothing breaks; the day it answers it by holding that dialog
+       * back when framed, this picks it up with no change here.
+       */
+      live: "https://www.withmodus.co/?embed=1",
+    },
+    action: { label: "Read the case study", href: "/work/modus", external: false },
+    caseStudy: "/work/modus",
+  },
+  {
     kind: "Client / Development",
     title: ["BEBO", "Betonboren"],
     slug: "bebo",
     summary:
       "A digital platform for a concrete drilling and sawing company, taking a traditional service business and giving it a clearer, more professional presence and a way of handling the work that comes in.",
     media: {
-      src: "/work/bebo-home",
-      alt: "bebobetonboren.nl as it stands today: the holding page, on raw concrete",
-      caption: "bebobetonboren.nl, the live holding page while the platform is built",
+      src: "/work/bebo-site",
+      w: 1680,
+      h: 958,
+      /** The site itself, built. bebobetonboren.nl still serves the holding
+       *  page today (checked 2026-10-04), so neither of these says "live". */
+      alt: "BEBO betonboren & zagen: the site, built around a single line about drilling to the millimetre",
+      caption: "The BEBO site as built. The domain still carries the holding page.",
     },
-    action: { label: "Visit the live site", href: "https://www.bebobetonboren.nl/", external: true },
+    action: { label: "Visit bebobetonboren.nl", href: "https://www.bebobetonboren.nl/", external: true },
     /** no case study yet, and none is implied */
     caseStudy: null as string | null,
-  },
-  {
-    kind: "Software / Development",
-    title: ["Goodreads", "Rebuilt"],
-    slug: "goodreads",
-    summary:
-      "An independent Goodreads redesign built as a working system: a 9,021-book catalogue ingested from Open Library, hybrid search in PostgreSQL that survives a typo, server-side sessions, and a Spring Boot API that owns every domain decision.",
-    media: {
-      src: "/work/goodreads-discover",
-      alt: "Goodreads rebuilt: the catalogue as one surface, with a genre rail of real covers and search",
-      caption: "Discover: browse and search as one surface, served from our own PostgreSQL",
-    },
-    action: { label: "Read the case study", href: "/work/goodreads", external: false },
-    caseStudy: "/work/goodreads",
   },
 ] as const;
 

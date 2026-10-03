@@ -590,6 +590,33 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
   transition: opacity 640ms var(--ease) 230ms, transform 900ms var(--ease) 230ms;
 }
 
+/* ---- the live surface --------------------------------------------------
+   The real website, rendered at a desktop width and scaled into the
+   rectangle the still occupies. It lies OVER the still and never replaces
+   it: if it never arrives, the photograph underneath is what stays, and the
+   composition is unchanged. It takes no pointer events, so entering the
+   image still belongs to the portfolio. */
+.work__live {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms var(--ease);
+}
+.work__live[data-ready] { opacity: 1; }
+.work__live iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 0;
+  display: block;
+  transform: scale(var(--s, 1));
+  transform-origin: 0 0;
+}
+
 /* ---- the lens ----------------------------------------------------------
    It holds a second copy of the photograph, inverted and pinned to the pixel
    against the one behind it, clipped to a small rectangle that eases after
@@ -598,7 +625,7 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: 2;        /* over the live surface as well as the still */
   display: grid;
   place-items: center;
   width: clamp(104px, 8.4vw, 140px);

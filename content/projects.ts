@@ -160,6 +160,91 @@ const devCase = <T extends Partial<Project>>(sections: T): Partial<Project> =>
   process.env.NODE_ENV !== "production" ? sections : {};
 
 export const PROJECTS: Project[] = [
+  /**
+   * MODUS — withmodus.co
+   *
+   * EVERY LINE BELOW IS TAKEN FROM THE RUNNING SITE, read on 2026-10-04, or
+   * from its own response headers. The positioning, the three stages, the
+   * five disciplines, the areas it names, the surfaces its demo exposes and
+   * the limits it states about that demo are all things MODUS says about
+   * itself in public.
+   *
+   * What is NOT here is as deliberate. MODUS labels its own example
+   * engagement "Illustrative example" and its demo "Sample data · local demo
+   * · no live integrations or AI", so the figures beside them are not
+   * outcomes and do not appear here as any. No clients, no users, no revenue
+   * and no measured results: none of those can be verified.
+   */
+  {
+    slug: "modus",
+    number: "01",
+    title: "MODUS",
+    subtitle: "A business improvement platform: find the friction, fix what matters, keep going.",
+    type: "Product / Platform",
+    role: ["Product development", "Full-stack development", "Automations", "UI / UX"],
+    year: "2026",
+    status: "Live",
+    technologies: ["TypeScript", "React", "Next.js", "Vercel"],
+    liveUrl: "https://www.withmodus.co",
+
+    showcaseMedia: {
+      kind: "image",
+      src: "/work/modus-home.jpg",
+      alt: "withmodus.co: the homepage, with the network of a business resolving behind the opening line",
+      width: 1680,
+      height: 958,
+    },
+    heroMedia: {
+      kind: "image",
+      src: "/work/modus-home.jpg",
+      alt: "The MODUS homepage: a network of points resolving into a sphere beside the line \u201cFind the friction. Move forward.\u201d",
+      width: 1680,
+      height: 958,
+    },
+
+    context: [
+      "MODUS is a business improvement platform. It describes itself as business optimization and improvement infrastructure: something that continuously finds and fixes inefficiencies across operations, technology, data, automation and customer experience.",
+      "The line it leads with is \u201cBusiness, without the friction\u201d, and the argument underneath it is that most businesses do not need another tool. They need to see what is slowing them down, and where time, money and attention are being lost.",
+    ],
+
+    problems: [
+      {
+        title: "The symptom is rarely the problem",
+        body: "The product rests on one idea, and the site states it plainly: businesses are systems. A customer service problem may actually be a workflow problem. A sales problem may actually be a follow-up problem. A reporting problem may actually be a data architecture problem. An automation problem may actually be a badly designed process. Anything that treats the visible symptom leaves the system that produced it untouched.",
+      },
+      {
+        title: "Improvement stops when the engagement does",
+        body: "A diagnosis is a document. MODUS is structured as three stages rather than one deliverable: diagnose what is slowing the business down, improve what matters, then keep learning from the operation and improve what comes next. The third stage is what makes it infrastructure rather than a report.",
+      },
+    ],
+
+    product: {
+      body: [
+        "MODUS maps across a business rather than into one corner of it: sales, operations, finance, service and the tools underneath them, held as one connected picture rather than five separate ones.",
+        "The work is organised as five disciplines. Process, to streamline work and reduce friction. Technology, to improve software infrastructure and remove unnecessary complexity. Intelligence, to turn fragmented information into usable decision support. Automation, to remove repetitive work and apply AI where it is actually practical. Customer, to take the friction out of how customers find, buy from and stay with a business.",
+        "The platform surface is MODUS OS: business health, signals, active work and measured outcomes in one place, rather than an inbox somebody waits on. The site carries a working demo of it, with Overview, Signals and Workflow, following a single enquiry from a scattered intake to a concrete next step.",
+        "The demo is honest about what it is, and says so on screen: sample data, running locally, with no live integrations and no AI behind it, and available features depending on the scope actually agreed. The network on the homepage carries the same note, that it illustrates the kind of signal a diagnostic looks for rather than analysing anybody's business.",
+      ],
+    },
+
+    result: {
+      body: [
+        "The site is live at withmodus.co, built with Next.js and React and served from Vercel.",
+        "The public surface is complete: the positioning, the three stages, the five disciplines, a diagnostic entry point that opens by asking what could work better, the MODUS OS demo, and pricing.",
+        "No outcome figures are published here. MODUS marks its own example engagement as illustrative and its demo as sample data, which is the right way round, and repeating those numbers as results would be the wrong one.",
+      ],
+    },
+
+    seo: {
+      title: "MODUS, a business improvement platform",
+      description:
+        "MODUS is a business improvement platform built around finding friction: mapping how a company works across operations, technology, data, automation and customer experience, and improving it.",
+    },
+    openGraph: {
+      title: "MODUS \u00b7 Business improvement platform",
+      description: "Find the friction. Move forward. A platform for mapping how a business works and improving it.",
+    },
+  },
   {
     /*
      * GOODREADS — an independent redesign, and the first real case study.
@@ -177,7 +262,7 @@ export const PROJECTS: Project[] = [
      * them as out of scope.
      */
     slug: "goodreads",
-    number: "01",
+    number: "02",
     title: "Goodreads",
     subtitle: "An independent Goodreads redesign: the core reading system, built end to end.",
     type: "Full-stack application",
@@ -516,7 +601,7 @@ const nextConfig: NextConfig = {
   },
   {
     slug: "bebo",
-    number: "02",
+    number: "03",
     title: "BEBO",
     type: "Client website",
     role: ["Web development", "Production"],
@@ -525,7 +610,7 @@ const nextConfig: NextConfig = {
   },
   {
     slug: "jorisvrr",
-    number: "03",
+    number: "04",
     title: "jorisvrr.com",
     type: "Portfolio",
     role: ["Frontend", "Interaction engineering"],
@@ -747,7 +832,7 @@ const nextConfig: NextConfig = {
   },
   {
     slug: "java-backend",
-    number: "04",
+    number: "05",
     title: "Java / Backend",
     type: "Coming soon",
     comingSoon: true,

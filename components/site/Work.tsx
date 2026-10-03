@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FEATURED, WORK_INTRO } from "@/content/portfolio";
+import { WorkLive } from "./WorkLive";
 
 /**
  * SELECTED WORK.
@@ -141,11 +142,16 @@ export function Work() {
                   srcSet={`${p.media.src}-960.webp 960w, ${p.media.src}-1680.webp 1680w`}
                   sizes="(max-width: 900px) 100vw, 42vw"
                   alt={p.media.alt}
-                  width={1680}
-                  height={1074}
+                  width={p.media.w}
+                  height={p.media.h}
                   loading="lazy"
                   decoding="async"
                 />
+                {/* the real site, over the still, where it is worth running */}
+                {"live" in p.media && p.media.live ? (
+                  <WorkLive src={p.media.live} title={`${p.title.join(" ")}, live site`} />
+                ) : null}
+
                 {/* the lens: the same photograph, inverted, clipped to a box */}
                 <span className="work__lens" aria-hidden="true">
                   <img
@@ -153,8 +159,8 @@ export function Work() {
                     srcSet={`${p.media.src}-960.webp 960w, ${p.media.src}-1680.webp 1680w`}
                     sizes="(max-width: 900px) 100vw, 42vw"
                     alt=""
-                    width={1680}
-                    height={1074}
+                    width={p.media.w}
+                    height={p.media.h}
                     loading="lazy"
                     decoding="async"
                   />
