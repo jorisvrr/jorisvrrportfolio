@@ -920,7 +920,14 @@ html[data-hero-cursor] .cross { opacity: 0; }
    RESPONSIVE — the desktop composition is experimental; this is not.
    ========================================================================= */
 @media (max-width: 900px) {
-  :root { --rhythm: clamp(72px, 10vh, 120px); }
+  :root {
+    --rhythm: clamp(72px, 10vh, 120px);
+    /* One edge for the whole phone layout. Everything that sets its own
+       distance from the side of the screen reads this, so the intro, the
+       word, the paragraph and the six categories all start on the same
+       line instead of at four unrelated offsets. */
+    --gutter: clamp(22px, 5.5vw, 30px);
+  }
 
   /* the hero is the one place a phone should not be quieter: the lines scale
      with the screen rather than falling back to a desktop minimum */
@@ -930,23 +937,83 @@ html[data-hero-cursor] .cross { opacity: 0; }
   .m { letter-spacing: 0.16em; }
 
   .screen { padding: clamp(70px, 11vh, 110px) var(--gutter) clamp(48px, 8vh, 80px); }
-  .about__word { font-size: min(30vw, 22vh); }
-  .about__lead { max-width: none; text-align: left; font-size: clamp(26px, 7.4vw, 44px); }
-  .about__claim { justify-content: start; }
-  .about__body { margin-left: 0; }
 
-  /* the landscape keeps its shape on a phone — lanes and bleeds, at a
-     phone's scale — rather than collapsing into a list */
-  .focus__w { font-size: calc(clamp(19px, 7.2vw, 38px) * var(--s, 1)); }
-  .focus__word:nth-of-type(1) { --x: 6%;  --y: 26%; }
-  .focus__word:nth-of-type(2) { --x: 32%; --y: 35%; }
-  .focus__word:nth-of-type(3) { --x: 12%; --y: 45%; }
-  .focus__word:nth-of-type(4) { --x: 52%; --y: 54%; }
-  .focus__word:nth-of-type(5) { --x: 8%;  --y: 63%; }
-  .focus__word:nth-of-type(6) { --x: 22%; --y: 73%; }
-  .focus__field[data-live] .focus__word:not([data-open]) .focus__w { opacity: 0.3; }
-  .focus__said { width: min(70vw, 40ch); }
+  /* ---- ABOUT, read down instead of across ------------------------------
+     The desktop composition stands the word beside the claim. At this width
+     that is two narrow columns fighting each other: the claim is squeezed
+     into the right half and the word, centred in its own row, lands across
+     the paragraph. One column, in the order it should be read, and the word
+     is a thing you pass rather than a thing in the way. */
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    row-gap: clamp(20px, 3.2vh, 34px);
+    column-gap: 0;
+  }
+  .about__say { display: contents; }     /* so the word can sit between them */
+  .about__label { grid-row: 1; }
+  .about__lead { grid-row: 2; }
+  .about__word { grid-row: 3; }
+  .about__body { grid-row: 4; }
+  .about .stack { grid-row: 5; }
+  .about__label,
+  .about__lead,
+  .about__word,
+  .about__body {
+    grid-column: 1;
+    padding-inline: var(--gutter);
+    max-width: none;
+  }
+  .about__word {
+    align-self: start;
+    font-size: min(21vw, 14vh);
+    /* it travelled past the paragraph on the way in; there is no room for
+       that here, and nothing for it to travel against */
+    transform: none;
+  }
+  .about__lead { text-align: left; font-size: clamp(25px, 7vw, 38px); line-height: 1.1; }
+  .about__body { transform: none; gap: 16px; }
+  .about__body p { font-size: clamp(14px, 3.9vw, 16px); line-height: 1.62; }
+
+  /* ---- WHAT I WORK WITH, still a landscape ------------------------------
+     Absolute lanes placed as a fraction of a desktop screen do not survive
+     being 390px wide: they were the same six words at arbitrary pixel
+     coordinates. The words are in flow now, one per row, each stepped in by
+     a share of the CONTENT width rather than of the viewport, so the stagger
+     is a grid and the longest line cannot reach an edge. It still reads as a
+     landscape; it just has a floor under it. */
+  .focus { display: grid; gap: clamp(26px, 4.5vh, 46px); padding-block: clamp(70px, 11vh, 110px) clamp(40px, 7vh, 70px); }
+  .focus__label {
+    position: static;
+    padding-inline: var(--gutter);
+    align-items: baseline;
+  }
+  .focus__field {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    display: grid;
+    gap: clamp(12px, 2.2vh, 22px);
+    padding-inline: var(--gutter);
+  }
+  .focus__word {
+    position: static;
+    width: max-content;
+    max-width: 100%;
+    transform: none;
+  }
+  .focus__w { font-size: calc(clamp(19px, 7vw, 38px) * var(--s, 1)); }
+  /* the stagger, as a share of the content width: the longest words get the
+     smallest indent, so nothing reaches the gutter at 360px */
+  .focus__word:nth-of-type(1) { margin-left: 0; }
+  .focus__word:nth-of-type(2) { margin-left: 38%; }
+  .focus__word:nth-of-type(3) { margin-left: 12%; }
+  .focus__word:nth-of-type(4) { margin-left: 62%; }
+  .focus__word:nth-of-type(5) { margin-left: 6%; }
+  .focus__word:nth-of-type(6) { margin-left: 20%; }
+  .focus__field[data-live] .focus__word:not([data-open]) .focus__w { opacity: 0.32; }
   .focus__hint { display: none; }
+  .focus__panel { padding-inline: var(--gutter); }
 
   /* the same composition at a phone's scale: the first project still comes
      up the left, the second up the right — but there is no pointer to hold
@@ -1044,4 +1111,39 @@ html[data-hero-cursor] .cross { opacity: 0; }
   .hero__corners { opacity: 1; transform: none; }
   .hero__ch { display: none; }
   .project__figure img { transform: none; transition: none; }
+}
+
+/* =========================================================================
+   WHAT I WORK WITH, ON A TOUCH SCREEN
+
+   There is no pointer to hold a word with, so the description cannot live on
+   the word: at 390px it lands on top of the three words under it, which is
+   exactly what it was doing. It gets its own place below the landscape, and
+   a tap moves it there rather than stacking another one over the type.
+   ========================================================================= */
+.focus__panel { display: none; }
+
+@media (hover: none) {
+  /* never over the words */
+  .focus__said { display: none !important; }
+  /* nothing trails a thumb */
+  .focus__mark { display: none; }
+
+  .focus__panel {
+    display: grid;
+    gap: 10px;
+    min-height: 7.5em;              /* the landscape does not jump on a tap */
+    border-top: 1px solid var(--rule);
+    padding-top: clamp(14px, 2.4vh, 22px);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms var(--ease), transform 460ms var(--ease);
+  }
+  .focus__panel[data-open] { opacity: 1; transform: none; }
+  .focus__panel .focus__line { font-size: clamp(14px, 3.9vw, 17px); line-height: 1.55; }
+  .focus__panel .focus__keys { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+}
+
+@media (hover: none) and (prefers-reduced-motion: reduce) {
+  .focus__panel { transition: none; transform: none; }
 }

@@ -15,10 +15,19 @@ import { Proximity } from "./Proximity";
  *
  * Hover, focus and click all make a word active, so a pointer, a keyboard
  * and a thumb all get the same thing.
+ *
+ * A THUMB IS NOT A POINTER, though, and the difference matters twice. Hover
+ * is guarded to a real mouse, and focus to :focus-visible, because a tap
+ * fires pointerenter AND focus AND click, and either of the first two would
+ * open the word for the click to toggle shut again in the same gesture. And what a word means
+ * cannot float over the landscape on a screen this size, so on a touch
+ * device it is given its own place underneath instead; the panel below is
+ * that place, and CSS decides which of the two is in use.
  */
 export function Focus() {
   const [open, setOpen] = useState<string | null>(null);
   const root = useRef<HTMLDivElement>(null);
+  const live = FOCUS.items.find((i) => i.id === open);
 
   // the mark that trails the pointer — two properties, one frame
   const frame = useRef(0);
@@ -50,7 +59,7 @@ export function Focus() {
         data-track
         data-live={open || undefined}
         onPointerMove={track}
-        onPointerLeave={() => setOpen(null)}
+        onPointerLeave={(e) => e.pointerType === "mouse" && setOpen(null)}
       >
         <span className="focus__mark" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none">
@@ -70,8 +79,13 @@ export function Focus() {
             data-cursor="text"
             style={{ ["--i" as string]: i, ["--delay" as string]: `${i * 70}ms` }}
             aria-expanded={open === item.id}
-            onPointerEnter={() => setOpen(item.id)}
-            onFocus={() => setOpen(item.id)}
+            onPointerEnter={(e) => e.pointerType === "mouse" && setOpen(item.id)}
+            // Keyboard focus opens a word; a TAP must not. Tapping focuses
+            // the button first and clicks it second, so an unguarded focus
+            // handler sets the word open and the click immediately toggles
+            // it shut again — the first tap looked like it did nothing.
+            // :focus-visible is the one thing that tells the two apart.
+            onFocus={(e) => { if (e.currentTarget.matches(":focus-visible")) setOpen(item.id); }}
             onBlur={() => setOpen(null)}
             onClick={() => setOpen(open === item.id ? null : item.id)}
           >
@@ -89,6 +103,20 @@ export function Focus() {
 
         {/* the one hint on the site */}
         <span className="focus__hint m" aria-hidden="true">↓ {FOCUS.hint}</span>
+      </div>
+
+      {/* Where a word's meaning goes when there is no pointer to hold it
+          with. It is below the landscape, never over it, and it is the same
+          state driving it, so a tap moves it rather than stacking. */}
+      <div className="focus__panel" data-open={live ? "" : undefined} aria-live="polite">
+        {live ? (
+          <>
+            <p className="focus__line">{live.line}</p>
+            <p className="focus__keys">
+              {live.keywords.map((k) => <span key={k} className="m">{k}</span>)}
+            </p>
+          </>
+        ) : null}
       </div>
     </section>
   );
