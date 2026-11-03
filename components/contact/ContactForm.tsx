@@ -93,7 +93,7 @@ export function ContactForm() {
     return (
       <div className="reach__done" role="status">
         <p className="d reach__done-h">{F.sent.heading}</p>
-        <p className="reach__done-b">{F.sent.body}</p>
+        <p className="read reach__done-b">{F.sent.body}</p>
         <p>
           <button type="button" className="action" onClick={() => { setSent(false); setErrors({}); }}>
             {F.sent.again}

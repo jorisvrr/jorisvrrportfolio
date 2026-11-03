@@ -93,7 +93,7 @@ export function Focus() {
             {/* attached to its own word, and shown only while it is the live
                 one — there is no permanent place for descriptions here */}
             <span className="focus__said">
-              <span className="focus__line">{item.line}</span>
+              <span className="read focus__line">{item.line}</span>
               <span className="focus__keys">
                 {item.keywords.map((k) => <span key={k} className="m">{k}</span>)}
               </span>
@@ -111,7 +111,7 @@ export function Focus() {
       <div className="focus__panel" data-open={live ? "" : undefined} aria-live="polite">
         {live ? (
           <>
-            <p className="focus__line">{live.line}</p>
+            <p className="read focus__line">{live.line}</p>
             <p className="focus__keys">
               {live.keywords.map((k) => <span key={k} className="m">{k}</span>)}
             </p>

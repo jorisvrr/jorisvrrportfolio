@@ -20,10 +20,13 @@ export function About() {
       </h2>
 
       <div className="about__say">
-        <p className="about__lead" data-reveal style={{ ["--delay" as string]: "90ms" }}>{ABOUT.lead}</p>
+        <p className="read read--lead about__lead" data-reveal style={{ ["--delay" as string]: "90ms" }}>
+          <span className="prompt" aria-hidden="true">&gt;_</span>
+          {ABOUT.lead}
+        </p>
         <div className="about__body" data-track>
           {ABOUT.body.map((p, i) => (
-            <p key={i} data-reveal style={{ ["--delay" as string]: `${180 + i * 90}ms` }}>{p}</p>
+            <p key={i} className="read" data-reveal style={{ ["--delay" as string]: `${180 + i * 90}ms` }}>{p}</p>
           ))}
         </div>
       </div>

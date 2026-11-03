@@ -100,7 +100,7 @@
   text-transform: uppercase;
   color: var(--ink);
 }
-.case-hero__sub { max-width: 60ch; font-size: 12px; line-height: 1.7; color: #5a5a5c; }
+.case-hero__sub { max-width: 62ch; font-size: 14px; line-height: 1.75; color: #5a5a5c; }
 .case-hero__meta { display: flex; flex-wrap: wrap; gap: 8px 40px; margin: 0; }
 .case-hero__meta > div { display: grid; gap: 4px; }
 .case-hero__meta dt { font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: #a2a2a2; }
@@ -227,8 +227,28 @@
 /* a jump lays the whole document out once; the measured sizes are kept */
 .case[data-jump] .case-section { content-visibility: visible; }
 
-.case-prose { display: grid; gap: 18px; max-width: 74ch; }
-.case-prose p { font-size: 13.5px; line-height: 1.75; color: #45454a; }
+/* ---- reading -------------------------------------------------------------
+   Everything in a case study that is read at length is set in the site's
+   reading voice (--font-read, app/site.css): mono, an open line, a measure
+   counted in its own characters. Headings, labels, diagrams and code keep
+   what they had. The colours are the document's own. */
+.case-prose,
+.case-problems p,
+.case-reqs li,
+.dec__text,
+.log__rows dd,
+.case-hero__sub,
+.dgm figcaption,
+.dmodel__note,
+.code__note {
+  font-family: var(--font-read);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+
+.case-prose { display: grid; gap: calc(15px * 1.8); max-width: 70ch; }
+.case-prose p { font-size: 15px; line-height: 1.8; color: #45454a; }
 .case-shot { width: 100%; margin-top: 10px; }
 
 /* ---- problems ----------------------------------------------------------- */
@@ -236,7 +256,7 @@
 .case-problems li { display: grid; grid-template-columns: 44px 1fr; gap: 0 18px; }
 .case-problems__n { grid-row: span 2; font-size: 9px; letter-spacing: 0.2em; color: #b0b0b0; padding-top: 4px; }
 .case-problems h3 { font-family: var(--font-sans); font-weight: 500; font-size: 16px; color: #262628; margin-bottom: 8px; }
-.case-problems p { font-size: 13px; line-height: 1.75; color: #4a4a4e; }
+.case-problems p { max-width: 70ch; font-size: 14.5px; line-height: 1.8; color: #4a4a4e; }
 
 .case-problems__shot { grid-column: 2; margin-top: 16px; display: grid; gap: 8px; }
 .case-problems__shot img { width: 100%; box-shadow: 0 1px 0 rgb(255 255 255 / 0.5), 0 16px 40px -34px rgb(0 0 0 / 0.5); }
@@ -249,11 +269,12 @@
 .case-reqs li {
   position: relative;
   padding-left: 18px;
-  font-size: 12px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.7;
   color: #4a4a4e;
 }
-.case-reqs li::before { content: ""; position: absolute; left: 0; top: 8px; width: 7px; height: 1px; background: #bcbcbc; }
+/* the dash sits on the first line's middle: half of 13.5px × 1.7 */
+.case-reqs li::before { content: ""; position: absolute; left: 0; top: 11px; width: 7px; height: 1px; background: #bcbcbc; }
 
 /* ---- architecture diagram ----------------------------------------------- */
 .dgm { display: grid; gap: 16px; }
@@ -317,7 +338,7 @@
 .dgm__skips { display: grid; gap: 4px; padding-left: 2px; }
 .dgm__skips li { font-size: 7.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a0a0a4; }
 
-.dgm figcaption, .dmodel__note { font-size: 10px; line-height: 1.7; color: #7d7d81; }
+.dgm figcaption, .dmodel__note { max-width: 80ch; font-size: 12px; line-height: 1.7; color: #6b6b6f; }
 
 /* ---- data model --------------------------------------------------------- */
 .dmodel { display: grid; gap: 22px; }
@@ -387,7 +408,7 @@
 .dec__item[data-open] .dec__inner { padding-bottom: 26px; }
 .dec__label { font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--burgundy); margin: 16px 0 7px; }
 .dec__inner > .dec__label:first-child { margin-top: 0; }
-.dec__text { max-width: 74ch; font-size: 12.5px; line-height: 1.75; color: #4a4a4e; }
+.dec__text { max-width: 70ch; font-size: 14px; line-height: 1.8; color: #4a4a4e; }
 .dec__text--lead { color: #232325; }
 .dec__text--result { padding-left: 14px; border-left: 1px solid rgb(102 31 44 / 0.3); }
 
@@ -421,7 +442,7 @@
 .code__line[data-mark] { background: rgb(102 31 44 / 0.06); box-shadow: inset 2px 0 0 var(--burgundy); }
 .code__no { text-align: right; padding-right: 14px; color: #bcbcc0; user-select: none; }
 .code__text { color: #3c3c40; white-space: pre; }
-.code__note { font-size: 10px; line-height: 1.7; color: #7d7d81; }
+.code__note { max-width: 80ch; font-size: 12px; line-height: 1.7; color: #6b6b6f; }
 
 /* ---- dev log ------------------------------------------------------------ */
 .log { display: grid; gap: 44px; }
@@ -431,7 +452,7 @@
 .log__rows { display: grid; gap: 14px; margin: 0; }
 .log__rows > div { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: baseline; }
 .log__rows dt { font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: #a4a4a8; }
-.log__rows dd { margin: 0; font-size: 12.5px; line-height: 1.75; color: #4a4a4e; }
+.log__rows dd { margin: 0; max-width: 70ch; font-size: 14px; line-height: 1.8; color: #4a4a4e; }
 .log__rows > div[data-wrong] dd { padding-left: 14px; border-left: 1px solid rgb(102 31 44 / 0.35); color: #55555a; }
 .log__rows > div[data-wrong] dt { color: var(--burgundy); }
 .log__rows > div[data-learned] dd { color: #232325; }
@@ -519,6 +540,14 @@
   .dec__pick { border-left: 0; border-bottom: 1px solid transparent; }
   .dec__pick[data-current] { border-bottom-color: var(--burgundy); }
   .dec__title { font-size: 15px; }
+  /* a step down for a phone's measure: mono at 15px is 40 characters wide */
+  .case-prose p { font-size: 14px; line-height: 1.75; }
+  .case-problems p, .dec__text, .log__rows dd { font-size: 13.5px; line-height: 1.75; }
+  /* the number column gives back width the mono column needs */
+  .case-problems li { grid-template-columns: 26px 1fr; gap: 0 12px; }
+  .case-reqs li { font-size: 13px; }
+  .case-reqs li::before { top: 10.5px; }
+  .case-hero__sub { font-size: 13.5px; }
   .log__rows > div { grid-template-columns: 1fr; gap: 6px; }
   .code__body { font-size: 10.5px; }
   .code__line { grid-template-columns: 30px 1fr; }
