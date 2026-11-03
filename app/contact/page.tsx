@@ -58,7 +58,7 @@ export default function ContactPage() {
               </span>
             ))}
           </h1>
-          <p className="reach__lead" data-reveal style={{ ["--delay" as string]: "180ms" }}>
+          <p className="read read--lead reach__lead" data-reveal style={{ ["--delay" as string]: "180ms" }}>
             {REACH.lead}
           </p>
         </section>
@@ -79,7 +79,7 @@ export default function ContactPage() {
                 </li>
               ))}
             </ol>
-            <p className="reach__note">{REACH.expect.note}</p>
+            <p className="read reach__note">{REACH.expect.note}</p>
           </div>
         </section>
 

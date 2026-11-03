@@ -40,7 +40,7 @@ export function Fields() {
             onClick={() => setOn(on === f.id ? null : f.id)}
           >
             <span className="d reach__field-t">{f.title}</span>
-            <span className="reach__field-l">{f.line}</span>
+            <span className="read reach__field-l">{f.line}</span>
           </button>
         </li>
       ))}

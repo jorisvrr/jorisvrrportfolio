@@ -30,6 +30,18 @@
   --col: min(1560px, 100vw - var(--gutter) * 2);
   --rhythm: clamp(96px, 14vh, 200px);   /* the space between sections */
 
+  /* ---- reading ----------------------------------------------------------
+     The voice for anything that is read rather than looked at: Geist Mono,
+     the face the site already speaks its labels in, set at reading size with
+     an open line. Mono runs wide (0.6em a character), so the sizes sit a
+     step under a proportional face's and the measure is counted in its own
+     characters. */
+  --font-read: var(--font-mono);
+  --read-size: clamp(14px, 0.55vw + 7.5px, 16px);
+  --read-lead: clamp(16px, 0.7vw + 8px, 20px);
+  --read-lh: 1.8;
+  --read-measure: 64ch;
+
   /* ---- motion ----------------------------------------------------------- */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
@@ -71,6 +83,31 @@ html.site, .site body { height: auto; overflow: visible auto; overflow-x: clip; 
   text-transform: uppercase;
   color: var(--ink-faint);
   line-height: 1.5;
+}
+/* Reading copy: what the page says at length. Quiet grey, the lead a step
+   darker and larger, nothing bold. */
+.read {
+  font-family: var(--font-read);
+  font-weight: 400;
+  font-size: var(--read-size);
+  line-height: var(--read-lh);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-soft);
+  max-width: var(--read-measure);
+  text-wrap: pretty;
+}
+.read--lead {
+  font-size: var(--read-lead);
+  line-height: 1.65;
+  color: var(--ink);
+}
+/* the one terminal detail on the site, before the introduction only */
+.prompt {
+  margin-right: 0.7ch;
+  letter-spacing: -0.08em;
+  color: var(--ink);
+  user-select: none;
 }
 
 .wrap { width: var(--col); margin-inline: auto; }
@@ -377,16 +414,16 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
   line-height: 0.82;
   transform: translateY(calc((0.5 - var(--p, 0.5)) * -80px));
 }
-.about__say { grid-column: 2; align-self: center; display: grid; gap: clamp(22px, 4vh, 46px); padding-right: var(--gutter); }
-.about__lead {
-  max-width: 19ch;
-  font-size: clamp(24px, 2.9vw, 46px);
-  font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+/* The claim and the detail behind it, read as a note: one face, one column,
+   a blank line between ideas. The claim is told apart by tone and a step in
+   size, not by weight. */
+.about__say { grid-column: 2; align-self: center; display: grid; gap: clamp(34px, 6.5vh, 68px); padding-right: var(--gutter); }
+.about__lead { max-width: 44ch; }
+.about__body {
+  display: grid;
+  gap: calc(var(--read-size) * var(--read-lh));   /* one blank line */
+  transform: translateY(calc((0.5 - var(--p, 0.5)) * -34px));
 }
-.about__body { display: grid; gap: 14px; max-width: 52ch; transform: translateY(calc((0.5 - var(--p, 0.5)) * -34px)); }
-.about__body p { color: var(--ink-soft); font-size: clamp(13px, 0.92vw, 15px); line-height: 1.68; }
 
 /* the floor of the composition */
 .stack {
@@ -427,12 +464,13 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
 .contact__q2 { color: var(--ink-faint); }
 .contact__answer {
   display: grid;
-  gap: clamp(20px, 3vh, 34px);
+  gap: clamp(26px, 4vh, 42px);
   justify-items: start;
-  padding-left: var(--gutter);
-  max-width: min(42ch, 64vw);
+  padding-inline: var(--gutter);
 }
-.contact__body { color: var(--ink-soft); font-size: clamp(15px, 1.2vw, 19px); }
+/* counted in its own characters: a mono 42ch is a narrower column than the
+   proportional one it replaced, so the measure is set on the text */
+.contact__body { max-width: 46ch; }
 .contact__links {
   width: 100vw;
   display: flex;
@@ -571,11 +609,10 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
 .work__summary {
   flex: 1 1 0;
   min-width: 0;
-  max-width: 56ch;
+  max-width: 46ch;
   margin-right: auto;
-  color: var(--ink-soft);
-  font-size: clamp(15px, 1.34vw, 22px);
-  line-height: 1.52;
+  font-size: var(--read-lead);
+  line-height: 1.7;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 300ms var(--ease), transform 440ms var(--ease);
@@ -724,7 +761,9 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
   position: absolute;
   left: 0;
   top: calc(100% + 12px);
-  width: max(34ch, 22vw);
+  /* mono runs wider than the face this was measured for: a little more
+     width keeps each line to two rows instead of three */
+  width: max(34ch, 24.5vw);
   max-width: 62vw;
   display: grid;
   gap: 7px;
@@ -735,10 +774,12 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
   transition: opacity 420ms var(--ease), transform 520ms var(--ease);
 }
 .focus__word[data-open] .focus__said { opacity: 1; transform: none; }
+/* the lane at the right edge keeps its narrower box, so it cannot run off */
+.focus__word:nth-of-type(4) .focus__said { width: max(34ch, 22vw); }
 /* the last lanes read upward, so a description never leaves the screen */
 .focus__word:nth-of-type(5) .focus__said,
 .focus__word:nth-of-type(6) .focus__said { top: auto; bottom: calc(100% + 12px); }
-.focus__line { font-size: clamp(13px, 1vw, 16px); line-height: 1.55; color: var(--ink-soft); }
+.focus__line { font-size: clamp(13px, 0.45vw + 7px, 15px); line-height: 1.7; }
 .focus__keys { display: flex; flex-wrap: wrap; gap: 5px 16px; }
 
 /* the one interaction hint on the page */
@@ -945,6 +986,9 @@ html[data-hero-cursor] .cross { opacity: 0; }
      the paragraph. One column, in the order it should be read, and the word
      is a thing you pass rather than a thing in the way. */
   .about {
+    /* the screen's own gutter would double the one each line sets itself,
+       and a mono column cannot spare the width */
+    padding-inline: 0;
     grid-template-columns: minmax(0, 1fr);
     align-content: start;
     row-gap: clamp(20px, 3.2vh, 34px);
@@ -971,9 +1015,9 @@ html[data-hero-cursor] .cross { opacity: 0; }
        that here, and nothing for it to travel against */
     transform: none;
   }
-  .about__lead { text-align: left; font-size: clamp(25px, 7vw, 38px); line-height: 1.1; }
-  .about__body { transform: none; gap: 16px; }
-  .about__body p { font-size: clamp(14px, 3.9vw, 16px); line-height: 1.62; }
+  .about__lead { text-align: left; }
+  .about__body { transform: none; }
+  .about .read { line-height: 1.75; }
 
   /* ---- WHAT I WORK WITH, still a landscape ------------------------------
      Absolute lanes placed as a fraction of a desktop screen do not survive
@@ -1054,7 +1098,8 @@ html[data-hero-cursor] .cross { opacity: 0; }
     max-width: none;
     margin: 0;
     text-align: left;
-    font-size: clamp(15px, 4vw, 18px);
+    font-size: var(--read-size);
+    line-height: var(--read-lh);
     opacity: 1;
     transform: none;
     transition: none;
@@ -1087,6 +1132,8 @@ html[data-hero-cursor] .cross { opacity: 0; }
   .footer__lines > span { font-size: min(20vw, 14vh); }
   .footer__lines > span:nth-child(2), .footer__lines > span:nth-child(3) { padding-left: 0; }
   .contact__q { font-size: clamp(30px, 9vw, 54px); }
+  /* as in ABOUT: each line sets its own gutter, so the screen's is not added */
+  .contact { padding-inline: 0; }
 }
 
 @media (max-width: 560px) {
@@ -1140,7 +1187,7 @@ html[data-hero-cursor] .cross { opacity: 0; }
     transition: opacity 360ms var(--ease), transform 460ms var(--ease);
   }
   .focus__panel[data-open] { opacity: 1; transform: none; }
-  .focus__panel .focus__line { font-size: clamp(14px, 3.9vw, 17px); line-height: 1.55; }
+  .focus__panel .focus__line { font-size: var(--read-size); line-height: var(--read-lh); }
   .focus__panel .focus__keys { display: flex; flex-wrap: wrap; gap: 6px 16px; }
 }
 

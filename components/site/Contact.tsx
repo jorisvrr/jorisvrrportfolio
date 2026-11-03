@@ -29,7 +29,7 @@ export function Contact() {
       </h2>
 
       <div className="contact__answer">
-        <p className="contact__body" data-reveal>{CONTACT.body}</p>
+        <p className="read contact__body" data-reveal>{CONTACT.body}</p>
         <p data-reveal style={{ ["--delay" as string]: "90ms" }}>
           <a className="action" href={CONTACT.cta.href} data-cursor="link">{CONTACT.cta.label}<Arrow /></a>
         </p>

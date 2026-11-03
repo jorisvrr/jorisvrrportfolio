@@ -171,7 +171,7 @@ export function Work() {
           </div>
 
           {/* the one line about it, across the side the image is not */}
-          <p className="work__summary">{p.summary}</p>
+          <p className="read work__summary">{p.summary}</p>
         </article>
       ))}
     </section>

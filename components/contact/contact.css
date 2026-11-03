@@ -25,10 +25,8 @@
    read across the screen rather than down a column. */
 .reach__lead {
   justify-self: end;
-  max-width: 46ch;
-  font-size: clamp(16px, 1.45vw, 23px);
-  line-height: 1.5;
-  color: var(--ink-soft);
+  max-width: 50ch;
+  color: var(--ink-soft);   /* the introduction is the heading's; this answers it */
 }
 
 /* ---- 02 · what to write about, and what happens to it ------------------- */
@@ -66,9 +64,8 @@
 /* the sentence is supporting detail: the five words are the answer */
 .reach__field-l {
   display: block;
-  font-size: clamp(13px, 1.02vw, 16px);
-  line-height: 1.55;
-  color: var(--ink-soft);
+  font-size: clamp(13px, 0.45vw + 7px, 15px);
+  line-height: 1.7;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 420ms var(--ease) 90ms, transform 620ms var(--ease) 90ms;
@@ -93,12 +90,7 @@
   font-size: clamp(18px, 2.1vw, 34px);
   letter-spacing: -0.01em;
 }
-.reach__note {
-  max-width: 34ch;
-  font-size: clamp(13px, 1vw, 16px);
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
+.reach__note { max-width: 38ch; }
 
 /* ---- 03 · the message, and every other way to reach me ------------------ */
 .reach__say { align-content: center; }
@@ -213,7 +205,7 @@
 /* what actually happened, said plainly */
 .reach__done { display: grid; gap: clamp(16px, 2.4vh, 26px); justify-items: start; align-content: start; }
 .reach__done-h { font-size: clamp(26px, 3.4vw, 54px); line-height: 1.02; }
-.reach__done-b { max-width: 42ch; font-size: clamp(14px, 1.15vw, 18px); line-height: 1.55; color: var(--ink-soft); }
+.reach__done-b { max-width: 46ch; }
 
 /* =========================================================================
    RESPONSIVE — the same editorial order, at a phone's scale
@@ -221,7 +213,7 @@
 @media (max-width: 900px) {
   .reach__h { font-size: min(24vw, 19vh); }
   .reach__h .mask:nth-child(2) { padding-left: 0; }
-  .reach__lead { justify-self: start; max-width: none; font-size: clamp(16px, 4.3vw, 20px); }
+  .reach__lead { justify-self: start; max-width: none; }
 
   .reach__field-hit {
     grid-template-columns: minmax(0, 1fr);
@@ -232,7 +224,7 @@
   /* there is no pointer to hold a word with, so every line is simply there */
   .reach__fields[data-live] .reach__field:not([data-on]) .reach__field-t { opacity: 1; }
   .reach__field[data-on] .reach__field-t { transform: none; color: inherit; }
-  .reach__field-l { opacity: 1; transform: none; transition: none; font-size: clamp(13px, 3.6vw, 16px); }
+  .reach__field-l { opacity: 1; transform: none; transition: none; font-size: var(--read-size); }
 
   .reach__expect { grid-template-columns: minmax(0, 1fr); align-items: start; }
   .reach__steps { gap: 14px 28px; }
