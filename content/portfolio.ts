@@ -9,8 +9,9 @@
  *
  * Sources: content/site.ts (name, contact, socials — unchanged since the
  * previous site), content/projects.ts (the Goodreads case study, built from
- * that project's own repository), and the rebuild brief of 2026-09-29 for the
- * positioning and the study programme.
+ * that project's own repository), and the positioning brief of 2026-11-17:
+ * a student of HBO-ICT with interests well beyond it, never a founder, a
+ * specialist or a job title.
  */
 
 import { SITE, SOCIALS } from "@/content/site";
@@ -19,11 +20,14 @@ export const IDENTITY = {
   name: SITE.name,
   first: "Joris",
   last: "van Rijn",
-  /** what the site is about, in five words */
-  discipline: "Software Engineering × Automations",
+  /** what the site is about, in a few words */
+  discipline: "Technology, design & business",
+  /** what I am, plainly: a student, of one thing, without a specialisation */
+  role: "HBO-ICT student",
+  school: "The Hague University of Applied Sciences",
   location: "Leiderdorp / NL",
   /** the hero's bottom-right system status */
-  status: "Open for work",
+  status: "Open to new projects",
   email: SITE.email,
   domain: SITE.domain,
 } as const;
@@ -32,27 +36,30 @@ export const IDENTITY = {
  * The lines that run across the hero. They are the hero — not a heading
  * inside it — so there are five of them and they divide the whole height
  * between them, running in alternating directions at different speeds.
+ *
+ * What the work spans, from building it to what it is for.
  */
 export const HERO_LINES = [
-  { text: "SOFTWARE ENGINEER", dir: 1 },
-  { text: "FULL-STACK DEVELOPER", dir: -1 },
-  { text: "AUTOMATIONS", dir: 1 },
-  { text: "PRODUCT DEVELOPMENT", dir: -1 },
+  { text: "SOFTWARE DEVELOPMENT", dir: 1 },
+  { text: "WEB DESIGN & DEVELOPMENT", dir: -1 },
+  { text: "VISUAL DESIGN", dir: 1 },
+  { text: "BRANDING & CREATIVE DIRECTION", dir: -1 },
   { text: "BUSINESS × TECHNOLOGY", dir: 1 },
 ] as const;
 
 export const ABOUT = {
   label: "(01)",
   heading: "About",
-  lead: "I build digital products and software at the intersection of technology, business and design.",
+  lead: "Technology is what I study. What interests me is wider: how things work, how they look, and how an idea becomes something real.",
   body: [
-    "I study HBO-ICT, on the software engineering track. What interests me is the system behind a product: the interfaces, the APIs, the data, the processes, and the way people actually end up using it.",
-    "My background is in visual design and filmmaking, which is where I learned to communicate an idea. It gives me a different way into development: I care how something is built, but also why it exists, what it costs the business, and how the finished thing feels to use.",
+    "I study HBO-ICT at The Hague University of Applied Sciences, where Java is the language I'm learning most deliberately. Visual design and film came first, and they still shape how I work. Photography, branding and fashion interest me for the same reason: they decide how something is seen before anyone uses it.",
+    "I learn by doing: start, find out what I don't know yet, make it better. It's also why entrepreneurship appeals to me. It asks for the idea, the thing itself and whether anyone needs it, all at once.",
   ],
-  /** Metadata, not a skills résumé: no bars, no percentages, no years. */
+  /** What I actually work with. Metadata, not a skills résumé: no bars, no
+   *  percentages, no years, and nothing I am only curious about. */
   stack: [
-    "Java", "React", "Next.js", "TypeScript", "SQL", "Supabase",
-    "APIs", "Git / GitHub", "Docker", "UI / UX", "Data", "Process optimization",
+    "Java", "Spring Boot", "TypeScript", "React", "Next.js", "SQL / PostgreSQL",
+    "Supabase", "Git / GitHub", "Docker", "UI / UX", "Visual design",
   ],
 } as const;
 
@@ -63,7 +70,6 @@ export const ABOUT = {
  */
 export const WORK_INTRO = {
   marker: "Selected work",
-  note: "One client, one my own",
 } as const;
 
 /**
@@ -90,7 +96,7 @@ export const FEATURED = [
     title: ["MODUS"],
     slug: "modus",
     summary:
-      "A business software and automation platform built around finding friction: mapping how a company actually works, fixing what is slowing it down, and connecting the tools behind it.",
+      "A business improvement platform built on one idea: the visible problem is rarely the real one. The site explains how it finds the friction, fixes what matters and keeps going, and carries a working demo of the product.",
     media: {
       src: "/work/modus-home",
       w: 1680,
@@ -119,7 +125,7 @@ export const FEATURED = [
     title: ["BEBO", "Betonboren"],
     slug: "bebo",
     summary:
-      "A digital platform for a concrete drilling and sawing company, taking a traditional service business and giving it a clearer, more professional presence and a way of handling the work that comes in.",
+      "A website for a concrete drilling and sawing company: a traditional trade, given a clearer and more professional presence, and a proper way to handle the work that comes in.",
     media: {
       src: "/work/bebo-site",
       w: 1680,
@@ -136,27 +142,53 @@ export const FEATURED = [
 ] as const;
 
 /**
- * WHAT I WORK WITH — categories, each with the things inside it. The keywords
- * are what I actually work with as a student, not a claim of expertise.
+ * SKILLS & INTERESTS — four areas, each with two honest lists.
+ *
+ * `keywords` is what I actually do or use. `exploring` is what I am curious
+ * about and working towards, and the interface labels it as exactly that, so
+ * an interest is never read as a skill.
  */
 export const FOCUS = {
   label: "(02)",
-  heading: "What I work with",
+  heading: "Skills & interests",
   hint: "click me",
+  exploringLabel: "Exploring",
   items: [
-    { id: "software", title: "Software", line: "Where most of my time goes: writing it, breaking it, reading other people's.", keywords: ["Java", "React", "Next.js", "APIs", "Full-stack"] },
-    { id: "automations", title: "Automations", line: "The repetitive parts of a process handled by something that does not get bored.", keywords: ["Workflows", "Integrations", "APIs", "Process optimization"] },
-    { id: "products", title: "Digital products", line: "Something a person opens and gets somewhere with. The rest is scaffolding.", keywords: ["Web applications", "Interfaces", "Prototypes", "Product thinking"] },
-    { id: "data", title: "Data", line: "The shape of the thing underneath. Get it wrong and everything above it bends.", keywords: ["SQL", "PostgreSQL", "Supabase", "Data modelling"] },
-    { id: "interfaces", title: "Interfaces", line: "Where the system meets somebody who did not build it.", keywords: ["User flows", "Interaction", "Design systems", "Prototyping"] },
-    { id: "business", title: "Business × technology", line: "What it is for, what it costs, and whether it was worth building.", keywords: ["Business analysis", "Process optimization", "Stakeholders"] },
+    {
+      id: "technology",
+      title: "Technology",
+      line: "What I study, and what I practise most. Java first, then the web around it: interfaces, APIs and the data underneath.",
+      keywords: ["Java", "Spring Boot", "TypeScript", "React / Next.js", "SQL"],
+      exploring: [] as string[],
+    },
+    {
+      id: "design",
+      title: "Design",
+      line: "How something looks is part of how it works. Interfaces, layout, type, and the details nobody notices until they are wrong.",
+      keywords: ["UI / UX", "Visual design", "Prototyping"],
+      exploring: ["Digital experiences"],
+    },
+    {
+      id: "creative",
+      title: "Creative work",
+      line: "Film taught me to look before deciding what to make. Photography and creative direction are where that habit goes now.",
+      keywords: ["Film", "Visual storytelling"],
+      exploring: ["Photography", "Creative direction", "Fashion"],
+    },
+    {
+      id: "business",
+      title: "Business",
+      line: "Why something should exist, who it is for, and whether it holds up outside my own head.",
+      keywords: ["Independent projects", "Client work"],
+      exploring: ["Entrepreneurship", "Branding"],
+    },
   ],
 } as const;
 
 export const CONTACT = {
   label: "(03)",
-  heading: ["Have a project", "or an opportunity?"],
-  body: "I'm open for work: software, automations, digital products. The things people actually end up using, built by people who care how they are built.",
+  heading: ["Have an idea", "worth talking about?"],
+  body: "Interesting projects, creative collaborations, a role, or simply a good conversation. If it's worth talking about, I'd like to hear it.",
   cta: { label: "Get in touch", href: "/contact" },
 } as const;
 
@@ -169,7 +201,7 @@ export const LINKS = [
 ] as const;
 
 export const FOOTER = {
-  lines: ["Let's", "build", "something."],
+  lines: ["Let's", "make", "something."],
   year: "2026",
 } as const;
 

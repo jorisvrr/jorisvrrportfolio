@@ -5,65 +5,64 @@ import "./globals.css";
 
 // Icons come from the file conventions in app/: favicon.ico, icon.png and
 // apple-icon.png, all cut from the supplied logo. The social preview is
-// public/og-image.jpg, cut from the supplied design.
+// public/og-image.jpg: the hero itself, at 1200 x 630.
+const TITLE = "Joris van Rijn · Technology, design & creative work";
+const DESCRIPTION =
+  "Joris van Rijn: HBO-ICT student working across technology, design and business. Web development, Java, digital design, photography and creative projects.";
+const SHORT =
+  "Technology, design and business: web development, Java, digital design, photography and creative projects.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
 
   title: {
-    default: "Joris van Rijn · Software Engineering & Automations",
+    default: TITLE,
     template: "%s · Joris van Rijn",
   },
 
-  description:
-    "Portfolio of Joris van Rijn, an HBO-ICT software engineering student building software, automations and digital products: full-stack and backend development, APIs, data, and the business thinking around them. Open for work.",
+  description: DESCRIPTION,
 
   keywords: [
     "Joris van Rijn",
-    "software engineering",
-    "full-stack development",
-    "backend development",
-    "automation",
+    "Joris van Rijn portfolio",
+    "technology and design",
+    "web development",
+    "digital design",
+    "photography",
+    "creative projects",
+    "Java",
     "HBO-ICT",
-    "portfolio",
   ],
 
-  authors: [
-    {
-      name: "Joris van Rijn",
-      url: SITE.origin,
-    },
-  ],
-
-  creator: "Joris van Rijn",
-  publisher: "Joris van Rijn",
+  authors: [{ name: SITE.name, url: SITE.origin }],
+  creator: SITE.name,
+  publisher: SITE.name,
 
   alternates: {
-    canonical: SITE.origin,
+    canonical: "/",
   },
 
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE.origin,
-    siteName: "Joris van Rijn",
-    title: "Joris van Rijn · Software Engineering & Automations",
-    description:
-      "Software, automations and digital products: full-stack and backend development, APIs, data, and the business thinking around them. Open for work.",
+    url: "/",
+    siteName: SITE.name,
+    title: TITLE,
+    description: SHORT,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Joris van Rijn, portfolio",
+        alt: "Joris van Rijn: technology, design, photography and business, set in large type",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Joris van Rijn · Software Engineering & Automations",
-    description:
-      "Software, automations and digital products. Full-stack and backend development, APIs and data. Open for work.",
+    title: TITLE,
+    description: SHORT,
     images: ["/og-image.jpg"],
   },
 
@@ -78,6 +77,46 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+};
+
+/**
+ * Structured data: the site and the person it belongs to, said once and
+ * only with what the page itself says. A student, of HBO-ICT, at one school;
+ * no job title, no specialisation, no employer. `knowsAbout` lists what the
+ * work on the site demonstrates, not everything I am curious about.
+ */
+const PERSON_ID = `${SITE.origin}/#person`;
+const STRUCTURED = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.origin}/#website`,
+      url: SITE.origin,
+      name: SITE.name,
+      description: SHORT,
+      inLanguage: "en",
+      author: { "@id": PERSON_ID },
+      publisher: { "@id": PERSON_ID },
+    },
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: SITE.name,
+      url: SITE.origin,
+      email: `mailto:${SITE.email}`,
+      image: `${SITE.origin}/portrait-820.webp`,
+      description:
+        "HBO-ICT student at The Hague University of Applied Sciences, working across technology, design and business.",
+      affiliation: { "@type": "CollegeOrUniversity", name: SITE.education.school },
+      address: { "@type": "PostalAddress", addressLocality: SITE.locality, addressCountry: "NL" },
+      knowsAbout: ["Java", "Web development", "Digital design", "Visual design", "User interface design"],
+      sameAs: [
+        "https://www.linkedin.com/in/jorisvnrijn/",
+        "https://www.instagram.com/jorisvrr",
+      ],
+    },
+  ],
 };
 
 export const viewport: Viewport = {
@@ -99,28 +138,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Joris van Rijn",
-              url: SITE.origin,
-              email: "mailto:jorisvrr@gmail.com",
-              jobTitle: "Software engineering student",
-              description: "HBO-ICT software engineering student building software, automations and digital products. Open for work.",
-              address: { "@type": "PostalAddress", addressLocality: "Leiderdorp", addressCountry: "NL" },
-              knowsAbout: [
-                "Software engineering",
-                "Full-stack development",
-                "Backend development",
-                "Automation",
-                "Digital product development",
-                "Data",
-              ],
-              sameAs: [
-                "https://www.linkedin.com/in/jorisvnrijn/",
-                "https://www.instagram.com/jorisvrr",
-              ],
-            }),
+            __html: JSON.stringify(STRUCTURED),
           }}
         />
         <a className="skip-link" href="#about">Skip to content</a>

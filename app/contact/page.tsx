@@ -14,22 +14,21 @@ import "@/components/contact/contact.css";
 export const metadata: Metadata = {
   title: "Get in touch",
   description:
-    "Write to Joris van Rijn about a software project, an automation, a digital product, a collaboration or a role. Direct email, phone, LinkedIn and Instagram.",
+    "Write to Joris van Rijn about a project, an idea, a creative collaboration or an opportunity. Or reach him directly by email, phone, LinkedIn or Instagram.",
   alternates: { canonical: "/contact" },
   openGraph: {
     type: "website",
     title: "Get in touch · Joris van Rijn",
-    description:
-      "Something you want built, an automation that would save time, or a conversation that might go somewhere.",
+    description: "A project, an idea, a creative collaboration, or a conversation that might go somewhere.",
     url: "/contact",
     siteName: "Joris van Rijn",
     locale: "en_US",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Joris van Rijn, portfolio" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Joris van Rijn: technology, design, photography and business, set in large type" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Get in touch · Joris van Rijn",
-    description: "Something you want built, an automation that would save time, or a conversation that might go somewhere.",
+    description: "A project, an idea, a creative collaboration, or a conversation that might go somewhere.",
     images: ["/og-image.jpg"],
   },
 };

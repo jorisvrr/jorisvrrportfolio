@@ -5,9 +5,9 @@ import { FOCUS } from "@/content/portfolio";
 import { Proximity } from "./Proximity";
 
 /**
- * WHAT I WORK WITH — a typographic landscape, not a list.
+ * SKILLS & INTERESTS — a typographic landscape, not a list.
  *
- * The six words are placed across the width of the screen rather than down
+ * The four areas are placed across the width of the screen rather than down
  * it: different lanes, different sizes, composed tightly enough to read as
  * one system. The one under the pointer comes forward, the rest recede, and
  * what it means appears attached to that word — nowhere else, and never
@@ -94,9 +94,7 @@ export function Focus() {
                 one — there is no permanent place for descriptions here */}
             <span className="focus__said">
               <span className="read focus__line">{item.line}</span>
-              <span className="focus__keys">
-                {item.keywords.map((k) => <span key={k} className="m">{k}</span>)}
-              </span>
+              <Keys item={item} />
             </span>
           </button>
         ))}
@@ -112,12 +110,33 @@ export function Focus() {
         {live ? (
           <>
             <p className="read focus__line">{live.line}</p>
-            <p className="focus__keys">
-              {live.keywords.map((k) => <span key={k} className="m">{k}</span>)}
-            </p>
+            <Keys item={live} />
           </>
         ) : null}
       </div>
     </section>
+  );
+}
+
+type Item = (typeof FOCUS.items)[number];
+
+/**
+ * What an area holds, in two rows that never blur together: what I actually
+ * use, and — labelled as such — what I am only exploring. Spans throughout,
+ * because the hover version lives inside a button.
+ */
+function Keys({ item }: { item: Item }) {
+  return (
+    <>
+      <span className="focus__keys">
+        {item.keywords.map((k) => <span key={k} className="m">{k}</span>)}
+      </span>
+      {item.exploring.length ? (
+        <span className="focus__keys focus__keys--exploring">
+          <span className="m focus__tag">{FOCUS.exploringLabel}</span>
+          {item.exploring.map((k) => <span key={k} className="m">{k}</span>)}
+        </span>
+      ) : null}
+    </>
   );
 }

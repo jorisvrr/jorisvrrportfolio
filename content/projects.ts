@@ -238,11 +238,12 @@ export const PROJECTS: Project[] = [
     seo: {
       title: "MODUS, a business improvement platform",
       description:
-        "MODUS is a business improvement platform built around finding friction: mapping how a company works across operations, technology, data, automation and customer experience, and improving it.",
+        "MODUS is a business improvement platform built around finding friction across operations, technology, data, automation and customer experience.",
     },
     openGraph: {
       title: "MODUS \u00b7 Business improvement platform",
       description: "Find the friction. Move forward. A platform for mapping how a business works and improving it.",
+      image: "/work/modus-og.jpg",
     },
   },
   {
@@ -586,13 +587,13 @@ const nextConfig: NextConfig = {
     },
 
     seo: {
-      title: "Goodreads, rebuilt, Java, Spring Boot and PostgreSQL case study",
+      title: "Goodreads, rebuilt in Java, Spring Boot and PostgreSQL",
       description:
-        "An independent Goodreads redesign built as a working product: a 9,021-book catalogue ingested from Open Library, hybrid search in PostgreSQL that recovers typos, server-side sessions with CSRF, and a Spring Boot API behind a same-origin Next.js frontend.",
-      keywords: ["software engineering case study", "Spring Boot", "PostgreSQL full-text search", "pg_trgm", "Next.js", "Java 25"],
+        "An independent Goodreads redesign in Java and Spring Boot: a 9,021-book catalogue, PostgreSQL search that survives a typo, and a Next.js frontend.",
+      keywords: ["Joris van Rijn", "Java", "web development", "Spring Boot", "PostgreSQL full-text search", "Next.js"],
     },
     openGraph: {
-      title: "Goodreads, rebuilt, a full-stack case study",
+      title: "Goodreads, rebuilt: a Java and Next.js case study",
       description:
         "A 9,021-book catalogue, hybrid PostgreSQL search that survives a typo, and a Spring Boot API that owns every domain decision.",
       // a JPEG for the platforms that still refuse WebP previews

@@ -21,13 +21,13 @@ export function Hero() {
 
       {/* what the moving type says, for anything that cannot see it */}
       <h1 className="sr-only">
-        {IDENTITY.name}. {IDENTITY.discipline}. Software engineer and full-stack developer.
+        {IDENTITY.name}: technology, design, photography and business. {IDENTITY.role} at {IDENTITY.school}.
       </h1>
 
       <HeroPortrait />
 
       <div className="hero__corners">
-        <p className="m">{IDENTITY.location} · Software engineering</p>
+        <p className="m">{IDENTITY.location} · {IDENTITY.role}</p>
         <p className="m hero__status">
           <span className="dot" aria-hidden="true" />
           {IDENTITY.status}

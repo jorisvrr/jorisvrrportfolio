@@ -4,37 +4,34 @@
  * Its own file because it is its own route, and because everything here is
  * said once, in one place, the same way the rest of the site keeps its copy.
  *
- * Nothing on this page is invented. The fields are the vocabulary the site
- * already uses for itself (`HERO_LINES`), each carrying the line it already
- * carries in What I Work With (`FOCUS`). The channels are the real ones from
- * `content/site.ts`. There are no clients, no services, no response times and
- * no availability promised anywhere: this is a person's portfolio, not an
- * agency, and the page says only what is true of it.
+ * Nothing on this page is invented. The fields are the things the rest of
+ * the site shows I actually do or care about, and the channels are the real
+ * ones from `content/site.ts`. There are no clients, no services, no
+ * response times and no availability promised anywhere: this is a person's
+ * portfolio, not an agency, and the page says only what is true of it.
  */
 
-import { ABOUT as PROFILE, SITE, SOCIALS } from "@/content/site";
-import { FOCUS } from "@/content/portfolio";
+import { CONTACT_DETAILS, SITE, SOCIALS } from "@/content/site";
 
-const line = (id: string) => FOCUS.items.find((f) => f.id === id)!.line;
-const phone = PROFILE.meta.find((m) => m.label === "Phone")!;
+const phone = CONTACT_DETAILS.phone;
 
 export const REACH = {
   label: "(04)",
   heading: ["Get in", "touch"],
 
   /** Said plainly, in the first person, claiming nothing. */
-  lead: "Something you want built, a product you are trying to get off the ground, an automation that would save somebody an afternoon a week, or a conversation that might go somewhere. Write it here and it comes straight to me.",
+  lead: "A project, an idea you want to test, a creative collaboration, a role, or a conversation that might go somewhere. Write it here and it comes straight to me.",
 
-  /** What someone can reasonably write to me about. The site's own words for
-   *  the work, with the line each one already has elsewhere. */
+  /** What someone can reasonably write to me about: the same ground the rest
+   *  of the site covers, and nothing it does not. */
   fields: {
-    label: "What I can help with",
+    label: "What to write about",
     items: [
-      { id: "software", title: "Software", line: line("software") },
-      { id: "automations", title: "Automations", line: line("automations") },
-      { id: "fullstack", title: "Full-stack development", line: "The whole of a thing: the interface, the API behind it, and the database under that." },
-      { id: "product", title: "Product development", line: line("products") },
-      { id: "business", title: "Business × technology", line: line("business") },
+      { id: "web", title: "Web development", line: "Sites and applications, built properly: the interface, and what runs behind it." },
+      { id: "design", title: "Design", line: "Interfaces and visual identity, where how something looks is part of how it works." },
+      { id: "creative", title: "Creative projects", line: "Photography, film, or something that does not fit a category yet." },
+      { id: "ideas", title: "Ideas", line: "Something you are starting and want to think through with someone who will ask questions." },
+      { id: "connect", title: "Opportunities", line: "A role, a collaboration, or simply a connection worth making." },
     ],
   },
 
@@ -57,12 +54,12 @@ export const REACH = {
     },
     /** The reason for writing, which becomes the subject line. */
     options: [
-      "Software / development",
-      "Automation",
-      "Digital product",
-      "Website",
+      "Web development",
+      "Design",
+      "Creative project",
+      "An idea",
       "Collaboration",
-      "Work opportunity",
+      "Opportunity",
       "Something else",
     ],
     send: "Send message",

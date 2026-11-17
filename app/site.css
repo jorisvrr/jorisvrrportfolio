@@ -698,10 +698,10 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
 .work__view:focus-visible .work__lens { --lx: 24%; --ly: 80%; }
 
 /* =========================================================================
-   WHAT I WORK WITH — one typographic landscape
+   SKILLS & INTERESTS — one typographic landscape
 
-   Six words across the width, in their own lanes and sizes but composed
-   tightly enough to read as a single system rather than six objects thrown
+   Four areas across the width, in their own lanes and sizes but composed
+   tightly enough to read as a single system rather than four objects thrown
    at a canvas: the whole thing occupies about three quarters of the screen,
    with controlled air around it. What a word means is attached to that word
    and shown only while it is live.
@@ -737,12 +737,10 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
 /* the landscape: tight lanes inside the middle three quarters of the screen */
 /* the block sits in the middle of the screen: air on both sides, lanes and
    sizes still irregular inside it */
-.focus__word:nth-of-type(1) { --x: 17%; --y: 29%; --s: 1.04; }
-.focus__word:nth-of-type(2) { --x: 55%; --y: 29%; --s: 0.82; }
-.focus__word:nth-of-type(3) { --x: 32%; --y: 43%; --s: 0.94; }
-.focus__word:nth-of-type(4) { --x: 76%; --y: 43%; --s: 1.10; }
-.focus__word:nth-of-type(5) { --x: 19%; --y: 57%; --s: 0.76; }
-.focus__word:nth-of-type(6) { --x: 44%; --y: 67%; --s: 0.70; }
+.focus__word:nth-of-type(1) { --x: 17%; --y: 30%; --s: 1.08; }
+.focus__word:nth-of-type(2) { --x: 60%; --y: 35%; --s: 0.96; }
+.focus__word:nth-of-type(3) { --x: 28%; --y: 50%; --s: 0.92; }
+.focus__word:nth-of-type(4) { --x: 62%; --y: 63%; --s: 1.04; }
 
 .prox__l { display: inline-block; transition: font-variation-settings 260ms var(--ease); }
 .focus__w {
@@ -774,13 +772,11 @@ html[data-nav="on-dark"] .nav { color: var(--night-ink); text-shadow: 0 0 7px rg
   transition: opacity 420ms var(--ease), transform 520ms var(--ease);
 }
 .focus__word[data-open] .focus__said { opacity: 1; transform: none; }
-/* the lane at the right edge keeps its narrower box, so it cannot run off */
-.focus__word:nth-of-type(4) .focus__said { width: max(34ch, 22vw); }
-/* the last lanes read upward, so a description never leaves the screen */
-.focus__word:nth-of-type(5) .focus__said,
-.focus__word:nth-of-type(6) .focus__said { top: auto; bottom: calc(100% + 12px); }
 .focus__line { font-size: clamp(13px, 0.45vw + 7px, 15px); line-height: 1.7; }
 .focus__keys { display: flex; flex-wrap: wrap; gap: 5px 16px; }
+/* what I am only exploring is said as such, never mixed in with what I use */
+.focus__tag { color: var(--ink-soft); }
+.focus__tag::after { content: " \2192"; }
 
 /* the one interaction hint on the page */
 .focus__hint {
@@ -1019,9 +1015,9 @@ html[data-hero-cursor] .cross { opacity: 0; }
   .about__body { transform: none; }
   .about .read { line-height: 1.75; }
 
-  /* ---- WHAT I WORK WITH, still a landscape ------------------------------
+  /* ---- SKILLS & INTERESTS, still a landscape ---------------------------
      Absolute lanes placed as a fraction of a desktop screen do not survive
-     being 390px wide: they were the same six words at arbitrary pixel
+     being 390px wide: they were the same words at arbitrary pixel
      coordinates. The words are in flow now, one per row, each stepped in by
      a share of the CONTENT width rather than of the viewport, so the stagger
      is a grid and the longest line cannot reach an edge. It still reads as a
@@ -1050,11 +1046,9 @@ html[data-hero-cursor] .cross { opacity: 0; }
   /* the stagger, as a share of the content width: the longest words get the
      smallest indent, so nothing reaches the gutter at 360px */
   .focus__word:nth-of-type(1) { margin-left: 0; }
-  .focus__word:nth-of-type(2) { margin-left: 38%; }
-  .focus__word:nth-of-type(3) { margin-left: 12%; }
-  .focus__word:nth-of-type(4) { margin-left: 62%; }
-  .focus__word:nth-of-type(5) { margin-left: 6%; }
-  .focus__word:nth-of-type(6) { margin-left: 20%; }
+  .focus__word:nth-of-type(2) { margin-left: 40%; }
+  .focus__word:nth-of-type(3) { margin-left: 10%; }
+  .focus__word:nth-of-type(4) { margin-left: 46%; }
   .focus__field[data-live] .focus__word:not([data-open]) .focus__w { opacity: 0.32; }
   .focus__hint { display: none; }
   .focus__panel { padding-inline: var(--gutter); }
